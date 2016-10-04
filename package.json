@@ -1,0 +1,31 @@
+{
+  "name": "menu-sass",
+  "version": "1.0.0",
+  "description": "Template Bee2Share",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Everto Denis",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-clean-css": "^2.0.10",
+    "gulp-htmlmin": "^2.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.10",
+    "run-sequence": "^1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evertondenis/b2s-theme.git"
+  },
+  "bugs": {
+    "url": "https://github.com/evertondenis/b2s-theme/issues"
+  },
+  "homepage": "https://github.com/evertondenis/b2s-theme#readme"
+}
