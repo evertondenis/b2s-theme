@@ -1,5 +1,2 @@
-<?php
-if(is_active_sidebar('sidebar-blog')){
-	dynamic_sidebar('sidebar-blog');
-}
-?>
+<?php if (!function_exists('dynamic_sidebar') || !dynamic_sidebar()): ?>
+<?php endif; ?>

@@ -1,33 +1,42 @@
+<?php
+$queried_post = get_page_by_path('titulo-blog',OBJECT,'page');
+$image = wp_get_attachment_image_src( get_post_thumbnail_id( $queried_post->ID ), 'full' );
+?>
 <?php include('header-pages.php'); ?>
-<?php edit_post_link(); ?>
+
 <div id="container-blog-page" class="blog-padding-top">
-    <div class="container">
-        <div class="crumbs"><?php the_breadcrumb(); ?></div>
+    <div class="row container-crumbs" style="background: #414042 url(<?php echo $image[0]; ?>) 0 -25px no-repeat">
+        <div class="container">
+            <div class="crumbs">
+                <?php echo $queried_post->post_content; ?>
+                <?php the_breadcrumb(); ?>
+            </div>
+        </div>
     </div>
 
     <div class="row">
         <div class="container no-padding">
 
             <!-- artigos -->
-            <div class="col-left">
+            <div class="col-md-8">
                     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
                 <section>
                     <article>
                         <header>
                             
                             <h1>
-                                <p class="title-categoria"><?php echo get_the_term_list( $post->ID, 'category', '', ' '); ?></p>
                                 <?php the_title();?>
                             </h1>
+                            <span class="tb-post-time"><?php echo get_the_author(); ?> / <time datetime="<?php the_time('Y-m-d g:i') ?>"> <?php the_time('j') ?> de <?php the_time('F') ?> de <?php the_time('Y') ?></time> / <?php //comments_number('0 Comentários', '1 Comentário', '% Comentários' );?></span>
                         </header>
                         <div class="row">
                             <?php if(has_post_thumbnail()) : ?>
-                            <figure class="tb-featured-image"><?php echo get_the_post_thumbnail( $post_id, 'img-post' ); ?><img class="ico-img" src="<?php bloginfo('template_url');?>/images/ico-image.png" alt=""></figure>
+                            <figure class="tb-featured-image"><?php echo get_the_post_thumbnail( $post_id, 'img-post' ); ?></figure>
                             <?php endif;?>
                         </div>
 
                         <div class="row padding-content">
-                            <span class="tb-post-time"><time datetime="<?php the_time('Y-m-d g:i') ?>"> <?php the_time('j') ?> de <?php the_time('F') ?> de <?php the_time('Y') ?></time></span>
+                            
                             <?php the_content();?>
                         </div>
 
@@ -54,37 +63,12 @@
                         </div>
 
                     </div>
-                </section>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="div-tags">
-                                <?php the_tags(); ?>
-                                <!-- <div class="div-comments">
-                                    <?php 
-                                    $args = array('post_id' => $post->ID, 'count' => true); $comments = get_comments($args);
-                                    if (!$comments) {
-                                        echo "NENHUM COMENTÁRIO";
-                                    } elseif ($comments == 1) {
-                                        echo $comments . " COMENTÁRIO";
-                                    } else {
-                                        echo $comments . " COMENTÁRIOS";
-                                    }
-                                    ?>
-                                </div> -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <?php endwhile; else: ?>
-                    <p><?php _e('Desculpe, essa página não existe.'); ?></p>
-                    <?php endif; ?>
-                
+                </section>                   
 
                 <div class="row"><h2>POSTS RELACIONADOS</h2></div>
                 <div class="row archive-post">
                     <?php
-                    $newsArgs = array( 'post_type' => 'blog',
+                    $newsArgs = array( 'post_type' => 'post',
                                         'posts_per_page' => 2,
                                         'orderby' => rand);
 
@@ -99,7 +83,7 @@
                                 <section>
                                     <div class="content" style="height: 550px;">
                                         <div class="container-imagem">
-                                            <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><img class="img-responsive" src="<?php echo $image[0]; ?>" alt="<?php the_title(); ?>"><img class="ico-img" src="<?php bloginfo('template_url');?>/images/ico-image.png" alt=""></a>
+                                            <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><img class="img-responsive" src="<?php echo $image[0]; ?>" alt="<?php the_title(); ?>"></a>
                                         </div>
                                         <div class="conteudo">
                                             <p class="title-categoria"><?php echo get_the_term_list( $post->ID, 'category', '', ' '); ?></p>
@@ -116,11 +100,20 @@
                         <?php endwhile; ?>
                     <?php endif; ?>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <section class="tags"><i class="fa fa-tag" aria-hidden="true"></i><?php the_tags(); ?></section>
+                    </div>
+                </div>
                 <div class="row"><?php comments_template( '/comments.php' ); ?></div>
+
+                <?php endwhile; else: ?>
+                <p><?php _e('Desculpe, essa página não existe.'); ?></p>
+                <?php endif; ?>                
             </div>
 
             <!-- Sidebar -->
-            <div class="col-right">
+            <div class="col-md-4">
                 <aside class="sidebar">
                     <?php include('sidebar-blog.php'); ?>
                 </aside>

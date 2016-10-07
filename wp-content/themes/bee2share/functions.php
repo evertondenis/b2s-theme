@@ -7,16 +7,16 @@ add_theme_support( 'post-thumbnails' );
 
 require_once('wp_bootstrap_navwalker.php');
 
-add_image_size( 'thumb-post', 320, 220, true );
-add_image_size( 'img-post', 650, 440, true );
+add_image_size( 'thumb-post', 345, 230, true );
+add_image_size( 'img-post', 750, 500, true );
 add_image_size( 'thumb-post-sidebar', 90, 90, true );
 
 function scripts_do_template() {
     wp_register_script('bootstrap', get_template_directory_uri().'/assets/lib/bootstrap/3.3.6/js/bootstrap.min.js#asyncload', array('jquery'), '', true);
-    wp_enqueue_style( 'style-oria', get_template_directory_uri() . '/assets/css/b2s.css',false,'1.0','all');
+    wp_enqueue_style( 'style-b2s', get_template_directory_uri() . '/assets/css/b2s.css',false,'1.0','all');
     wp_register_script('scripts', get_template_directory_uri().'/assets/js/scripts.js#asyncload', array(), '', true );
 
-    wp_enqueue_script('style-oria');
+    wp_enqueue_script('style-b2s');
     wp_enqueue_script('jquery');
     wp_enqueue_script('bootstrap');
     wp_enqueue_script('scripts');
@@ -27,11 +27,11 @@ add_action( 'after_setup_theme', 'wpt_setup' );
 
 function wpt_setup() {  
     register_nav_menu( 'primary', __( 'Primary navigation', 'wptuts' ) );
-    oria_theme_support();
+    b2s_theme_support();
     images_sizes();
 }
 
-function oria_theme_support() {
+function b2s_theme_support() {
     add_theme_support( 'post-thumbnails', array( 'post', 'page', 'blog' ));
     add_theme_support( 'post-formats', array( 'quote', 'gallery','video', 'audio', 'comments' ) );
 }
@@ -44,7 +44,7 @@ if (function_exists('register_sidebar')) {
     register_sidebar(array(
         'before_title' => '<h3>',
         'after_title' => '</h3>',
-        'before_widget' => '<div class="row"><div class="col-md-12"><div class="content">',
+        'before_widget' => '<div class="row"><div><div class="content">',
         'after_widget' => '</div></div></div>',
         ));
 
@@ -78,15 +78,15 @@ if (function_exists('register_sidebar')) {
         'after_title' => '</h3>',
         ) );
 
-    register_sidebar( array(
-        'name' => 'Footer Sidebar 4',
-        'id' => 'footer-sidebar-4',
-        'description' => 'Appears in the footer area',
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget' => '</div>',
-        'before_title' => '<h3 class="widget-title">',
-        'after_title' => '</h3>',
-        ) );
+    // register_sidebar( array(
+    //     'name' => 'Footer Sidebar 4',
+    //     'id' => 'footer-sidebar-4',
+    //     'description' => 'Appears in the footer area',
+    //     'before_widget' => '<div id="%1$s" class="widget %2$s">',
+    //     'after_widget' => '</div>',
+    //     'before_title' => '<h3 class="widget-title">',
+    //     'after_title' => '</h3>',
+    //     ) );
 
     register_sidebar(array(
         'name' => 'Coluna lateral Blog',
@@ -94,7 +94,7 @@ if (function_exists('register_sidebar')) {
         'description' => 'Coluna lateral para o blog',
         'before_title' => '<div class="content"><h3>',
         'after_title' => '</h3>',
-        'before_widget' => '<div class="row"><div class="col-md-12">',
+        'before_widget' => '<div class="row"><div>',
         'after_widget' => '</div></div></div>',
         ));
 }
@@ -106,7 +106,7 @@ if (function_exists('register_sidebar')) {
  * --------------------------------------------------------------
  */
 
-function registra_posts_blog() {
+function registra_theme_custom() {
     // $labels = array(
     //     'name'               => 'Posts',
     //     'singular_name'      => 'Blog',
@@ -204,8 +204,8 @@ function registra_posts_blog() {
     register_post_type( 'ctas', $cta_args );
     flush_rewrite_rules();
 }
-add_action( 'init', 'registra_posts_blog' );
-add_theme_support( 'post-thumbnails', array('post', 'ctas', 'custom-type'));
+add_action( 'init', 'registra_theme_custom' );
+add_theme_support( 'post-thumbnails', array('post', 'ctas', 'blog', 'custom-type'));
 
 function get_tag_id_by_name($tag_name) {
     global $wpdb;
@@ -263,9 +263,9 @@ function the_breadcrumb() {
     echo '<ul>';
     if (!is_home()) {
         echo '<li><a href="';
-        echo '/blog';
-        echo '" class="border-bottom-a">';
-        echo 'Blog';
+        echo '/';
+        echo '">';
+        echo 'Home';
         echo "</a></li>";
         if (is_category() || is_single()) {
             echo '<li>/</li>';
@@ -281,6 +281,53 @@ function the_breadcrumb() {
     elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {echo "<li>Blog Archives"; echo'</li>';}
     elseif (is_search()) {echo"<li>Search Results"; echo'</li>';}
     echo '</ul>';
+}
+
+/**
+ * --------------------------------------------------------------
+ * CUSTOM COMMENTS  
+ * --------------------------------------------------------------
+ */
+
+function custom_comments( $comment, $args, $depth ) {
+    $GLOBALS['comment'] = $comment;
+    switch( $comment->comment_type ) :
+    case 'pingback' :
+    case 'trackback' : ?>
+        <li <?php comment_class(); ?> id="comment<?php comment_ID(); ?>">
+        <div class="back-link">< ?php comment_author_link(); ?></div>
+    <?php break;
+    default : ?>
+        
+            <article <?php comment_class(); ?> class="comment">
+                <div class="comment-body">
+                    <figure><?php echo get_avatar( $comment, 50 ); ?></figure>
+                    <span class="author-name"><?php comment_author(); ?></span>
+                    <time <?php comment_time( 'c' ); ?> class="comment-time">
+                        <span class="date">
+                            <?php comment_date(); ?>
+                        </span>
+                        <span class="time">
+                            <?php comment_time(); ?>
+                        </span>
+                    </time>
+                    <div class="comentario"><?php comment_text(); ?></div>
+                </div><!-- comment-body -->
+                <footer class="comment-footer">
+                    <div class="reply"><?php 
+                        comment_reply_link( array_merge( $args, array( 
+                            'reply_text' => 'Resposta',
+                            'after' => ' <span></span>', 
+                            'depth' => $depth,
+                            'max_depth' => $args['max_depth'] 
+                            ) ) ); ?>
+                    </div><!-- .reply -->
+                </footer><!-- .comment-footer -->
+                <div class="clear">&nbsp;</div>
+            </article><!-- #comment-<?php comment_ID(); ?> -->
+        <?php // End the default styling of comment
+    break;
+    endswitch;
 }
 
 /**
@@ -345,7 +392,7 @@ class Realty_Widget extends WP_Widget{
         global $post;
         add_image_size( 'realty_widget_size', 90, 51, false );
         $listings = new WP_Query();
-        $listings->query('post_type=blog&posts_per_page=' . $numberOfListings );
+        $listings->query('post_type=post&posts_per_page=' . $numberOfListings );
         if($listings->found_posts > 0) {
             echo '<ul class="realty_widget">';
             while ($listings->have_posts()) {

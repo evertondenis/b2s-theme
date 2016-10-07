@@ -13,7 +13,7 @@ var nextidea = (function() {
 			jQuery(this).find(' > .dropdown-menu').stop(true, true).delay(50).fadeOut();
 		});
 
-		jQuery(".menu-menu-principal-container ul").append('<li class="linkedin"><a href="https://br.linkedin.com/in/oria-gest%C3%A3o-de-recursos-603a82124">Siga no Linkedin&nbsp;&nbsp;<i class="fa fa-linkedin" aria-hidden="true"></i></a></li>');
+		// jQuery(".menu-menu-principal-container ul").append('<li class="linkedin"><a href="https://br.linkedin.com/in/oria-gest%C3%A3o-de-recursos-603a82124">Siga no Linkedin&nbsp;&nbsp;<i class="fa fa-linkedin" aria-hidden="true"></i></a></li>');
 	}
 
 	function showMenu(){

@@ -93,10 +93,10 @@
             padding: 13px;
             font-family: $font-global;
             font-size: 14px;
-            color: $gray;
-            background-color: $yellow;
-            border: 1px solid $yellow;
-            border-radius: 4px;
+            color: #FFCB05;
+            background-color: #414042;
+            border: 1px solid #414042;
+            border-radius: 25px;
             -webkit-transition: all .2s ease-out;
             -moz-transition: all .2s ease-out;
             -ms-transition: all .2s ease-out;
@@ -108,10 +108,10 @@
                 padding: 13px;
                 font-family: $font-global;
                 font-size: 14px;
-                color: $gray;
-                background-color: $yellow;
-                border: 1px solid $yellow;
-                border-radius: 4px;
+                color: #FFCB05;
+                background-color: #414042;
+                border: 1px solid #414042;
+                border-radius: 25px;
                 -webkit-transition: all .2s ease-out;
                 -moz-transition: all .2s ease-out;
                 -ms-transition: all .2s ease-out;
@@ -123,10 +123,10 @@
                 padding: 13px;
                 font-family: $font-global;
                 font-size: 14px;
-                color: $gray;
-                background-color: $yellow;
-                border: 1px solid $yellow;
-                border-radius: 4px;
+                color: #FFCB05;
+                background-color: #414042;
+                border: 1px solid #414042;
+                border-radius: 25px;
                 -webkit-transition: all .2s ease-out;
                 -moz-transition: all .2s ease-out;
                 -ms-transition: all .2s ease-out;
@@ -138,10 +138,10 @@
                 padding: 13px;
                 font-family: $font-global;
                 font-size: 14px;
-                color: $gray;
-                background-color: $yellow;
-                border: 1px solid $yellow;
-                border-radius: 4px;
+                color: #FFCB05;
+                background-color: #414042;
+                border: 1px solid #414042;
+                border-radius: 25px;
                 -webkit-transition: all .2s ease-out;
                 -moz-transition: all .2s ease-out;
                 -ms-transition: all .2s ease-out;
@@ -168,25 +168,29 @@
             }
 
             &:hover {
-                background-color: $gray !important;
-                border-color: $gray !important;
-                border: 1px solid $gray;
-                color: $yellow;
+                background-color: #FFCB05 !important;
+                border-color: #FFCB05 !important;
+                border: 1px solid ;
+                color: #414042;
 
                 i {
-                    color: $yellow;
+                    color: #414042;
                 }
                 span {
-                    color: $yellow;
+                    color: #414042;
                 }
             }
         }
     }
 }
 
+.btn-lg {
+    border-radius: 25px;
+}
+
 .btn-blue-light {
     margin: 20px 0;
-    font-family: $roboto-regular;
+    font-family: $font-global;
     font-size: 16px;
     text-transform: uppercase;
     color: $white;
@@ -242,7 +246,7 @@
     border: 0 !important;
     margin: 20px 0;
     padding-left: 0;
-    font-family: $roboto-regular;
+    font-family: $font-global;
     font-size: 16px;
     text-transform: uppercase;
     color: $white;

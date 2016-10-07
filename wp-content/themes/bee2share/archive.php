@@ -1,22 +1,28 @@
-<?php include('header-blog.php'); ?>
-<div id="container-blog" class="blog-padding-top">
-	<div class="row">
-		<?php //the_breadcrumb(); ?>
-	</div>
+<?php include('header-pages.php'); ?>
 
+<div id="container-blog" class="blog-padding-top">
 	<div class="row">
 		<div class="container no-padding">
 
 			<!-- artigos -->
-			<div class="col-left">
+			<div class="col-md-8">
+				
 				<div class="row archive-post">
 					<?php
 					$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
-
-					$newsArgs = array( 'post_type' => 'blog',
-										'paged' => $paged
-										);
-
+					
+					$page_slug = trim( $_SERVER["REQUEST_URI"] , '/' );
+					$tag = substr($page_slug, 0, 3);
+					
+					if (is_category( )) {
+					  $cat = get_query_var('cat');
+					  $currentcat = get_category ($cat);
+					  $newsArgs = array( 'post_type' => 'post', 'paged' => $paged, 'category_name' => $currentcat->slug);
+					
+					} elseif($tag === 'tag') {
+						$currenttag = get_tag_id_by_name(substr($page_slug, 4));
+						$newsArgs = array( 'post_type' => 'post', 'paged' => $paged, 'tag_id' => $currenttag);
+					}
 					$newsLoop = new WP_Query( $newsArgs );
 
 					if( $newsLoop->have_posts() ) :
@@ -63,7 +69,7 @@
 							<?php endif; ?>
 						<?php $foo++; endwhile; ?>
 					<?php else:  ?>
-						<p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
+						<p><?php _e( 'Desculpe, nenhum artigo encontrado!' ); ?></p>
 					<?php endif; ?>
 				</div>
 				<div class="row text-center">
@@ -76,7 +82,7 @@
 			</div>
 
 			<!-- Sidebar -->
-			<div class="col-right">
+			<div class="col-md-4">
 				<aside class="sidebar">
 					<?php include('sidebar-blog.php'); ?>
 				</aside>

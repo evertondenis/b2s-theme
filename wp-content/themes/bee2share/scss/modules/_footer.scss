@@ -25,3 +25,154 @@
     	}
     }
 }
+
+.pull-right {
+    float: right !important;
+
+    .social {
+        display: inline-block;
+        margin: 0px 8px 25px;
+        a {
+            display: inline-block;
+            width: 34px;
+            margin-right: 6px;
+            text-decoration: none;
+            .icon {
+                background: #fff;
+                color: #414042;
+                font-size: 14px;
+                line-height: 22px;
+                display: block;
+                height: 19.42857143px;
+                line-height: 19.42857143px;
+                text-align: center;
+
+                // .icon-instagram:before {
+                //     content: "\E01A";
+                // }
+                &:hover {
+                    background: #3B5999;
+                }
+            }
+
+            &:before {
+                border: 17px solid #fff;
+                border-left-color: transparent;
+                border-right-color: transparent;
+                content: '';
+                display: block;
+                line-height: inherit;
+            }
+            &:before {
+                border-bottom-width: 10px;
+                border-top: none;
+            }
+            
+            &:after {
+                border: 17px solid #fff;
+                border-left-color: transparent;
+                border-right-color: transparent;
+                content: '';
+                display: block;
+            }
+            &:after {
+                border-bottom: none;
+                border-top-width: 10px;
+            }
+
+            &.facebook:hover {
+                color: #FFF;
+                .icon {
+                    color: #FFF;
+                    background: #3B5999;
+                }
+                &:before {
+                    border: 17px solid #3B5999;
+                    border-left-color: transparent;
+                    border-right-color: transparent;
+                    content: '';
+                    display: block;
+                    line-height: inherit;
+                }
+                &:before {
+                    border-bottom-width: 10px;
+                    border-top: none;
+                }
+                &:after {
+                    border: 17px solid #3B5999;
+                    border-left-color: transparent;
+                    border-right-color: transparent;
+                    content: '';
+                    display: block;
+                }
+                &:after {
+                    border-bottom: none;
+                    border-top-width: 10px;
+                }
+            }
+
+            &.twitter:hover {
+                color: #FFF;
+                .icon {
+                    color: #FFF;
+                    background: #52ABEF;
+                }
+                &:before {
+                    border: 17px solid #52ABEF;
+                    border-left-color: transparent;
+                    border-right-color: transparent;
+                    content: '';
+                    display: block;
+                    line-height: inherit;
+                }
+                &:before {
+                    border-bottom-width: 10px;
+                    border-top: none;
+                }
+                &:after {
+                    border: 17px solid #52ABEF;
+                    border-left-color: transparent;
+                    border-right-color: transparent;
+                    content: '';
+                    display: block;
+                }
+                &:after {
+                    border-bottom: none;
+                    border-top-width: 10px;
+                }
+            }
+
+            &.linkedin:hover {
+                color: #FFF;
+                .icon {
+                    color: #FFF;
+                    background: #0377B4;
+                }
+                &:before {
+                    border: 17px solid #0377B4;
+                    border-left-color: transparent;
+                    border-right-color: transparent;
+                    content: '';
+                    display: block;
+                    line-height: inherit;
+                }
+                &:before {
+                    border-bottom-width: 10px;
+                    border-top: none;
+                }
+                &:after {
+                    border: 17px solid #0377B4;
+                    border-left-color: transparent;
+                    border-right-color: transparent;
+                    content: '';
+                    display: block;
+                }
+                &:after {
+                    border-bottom: none;
+                    border-top-width: 10px;
+                }
+            }
+        }
+
+    }
+}

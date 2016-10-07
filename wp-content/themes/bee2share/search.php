@@ -1,46 +1,73 @@
 <?php
-/**
- * The template for displaying search results pages for the "showcase" custom post type.
- *
- * @package clarafi
- */
+$queried_post = get_page_by_path('titulo-blog',OBJECT,'page');
+$image = wp_get_attachment_image_src( get_post_thumbnail_id( $queried_post->ID ), 'full' );
+?>
+<?php include('header-pages.php'); ?>
+<div id="container-blog-page" class="blog-padding-top">
+  <div class="row container-crumbs" style="background: #414042 url(<?php echo $image[0]; ?>) 0 -25px no-repeat">
+      <div class="container">
+          <div class="crumbs">
+              <?php echo $queried_post->post_content; ?>
+              <?php the_breadcrumb(); ?>
+          </div>
+      </div>
+  </div>
 
-get_header(); ?>
+  <div class="row">
+    <div class="container no-padding">
+        <div class="col-md-8">
+          <header class="tb-seartch-title">
+            <h3 class="tb-title-1"><?php printf( __( 'Resultado da busca por: %s', 'post' ), '<span>' . get_search_query() . '</span>' ); ?></h3>
+          </header>
 
-	<section id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+          
 
-		<?php if ( have_posts() ) : ?>
+          <div class="row archive-post">
+          <?php if ( have_posts() ) : ?>
+          <?php while(have_posts()) : the_post(); ?>
+            <?php if(has_post_thumbnail()) : $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumb-post' ); endif; ?>
+            <div class="col-md-6">
+            
+              <section>
+                <div class="content" style="height: 550px;">
+                  <div class="container-imagem">
+                    <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><img class="img-responsive" src="<?php echo $image[0]; ?>" alt="<?php the_title(); ?>"></a>
+                  </div>
+                  <div class="conteudo">
+                    <p class="title-categoria"><?php echo get_the_term_list( $post->ID, 'category', '', ' '); ?></p>
+                    <h1><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h1>
+                    <p><?php the_excerpt(); ?></p>
+                    
+                  </div>
+                </div>
+                <div class="continuar-lendo">
+                  <a class="btn btn-primary btn-lg" href="<?php the_permalink() ?>" title="Continuar lendo: <?php the_title(); ?>"><span>Continuar Lendo</span><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                </div>
+              </section>
+            </div>
+            <?php endwhile; ?>
+              <?php else : ?>
+              <header class="tb-seartch-title">
+                <h3 class="tb-title-1"><?php printf( __( 'Nenhum artigo encontrado com o termo: %s', 'blog' ), '<span>' . get_search_query() . '</span>' ); ?></h3>
+              </header>
+            <?php endif; wp_reset_query();?>
+          </div>
+          <div class="row text-center">
+            <div class="pagination">
+              <?php if (function_exists("pagination")) {
+                  pagination($additional_loop->max_num_pages);
+              } ?>
+            </div>
+          </div>
+        </div>
 
-			<header class="page-header">
-				<h1 class="page-title"><?php printf( esc_html__( 'Search Results for: %s', 'clarafi' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
-			</header><!-- .page-header -->
-
-			<?php /* Start the Loop */ ?>
-			<?php while ( have_posts() ) : the_post(); ?>
-				<?php the_title(); ?>
-
-				<?php
-				/**
-				 * Run the loop for the search to output the results.
-				 * If you want to overload this in a child theme then include a file
-				 * called content-search.php and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', 'search' );
-				?>
-
-			<?php endwhile; ?>
-
-			<?php the_posts_navigation(); ?>
-
-		<?php else : ?>
-
-			<?php get_template_part( 'template-parts/content', 'none' ); ?>
-
-		<?php endif; ?>
-
-		</main><!-- #main -->
-	</section><!-- #primary -->
-
-<?php get_sidebar(); ?>
-<?php get_footer(); ?>
+        <!-- Sidebar -->
+        <div class="col-md-4">
+            <aside class="sidebar">
+                <?php include('sidebar-blog.php'); ?>
+            </aside>
+        </div>
+    </div>
+  </div>     
+</div>
+<?php include('footer-blog.php'); ?>
