@@ -8,7 +8,6 @@ wp-content/themes/bee2share/style.css
 .DS_Store
 wp-content/cache/.htaccess
 wp-content/uploads
-wp-config.php
 .htaccess
 wp-content/wp-cache-config.php
 wp-content/ewww/

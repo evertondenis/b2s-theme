@@ -2,7 +2,7 @@
 
 <div id="container-blog" class="blog-padding-top">
     <div class="row">
-        <?php //the_breadcrumb(); ?>
+        <?php ////the_breadcrumb(); ?>
     </div>
 
     <div class="row">
